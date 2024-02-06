@@ -50,12 +50,15 @@ public class TestUtils {
         System.out.println(thirdLargestNumber);
 
         // must return:
-//        Employee{name='Patrick', age=37, role=ENGINEER}
-//        Employee{name='Fryea', age=35, role=ENGINEER}
-//        Employee{name='Roe', age=26, role=ENGINEER}
+//        Patrick
+//        Fryea
+//        Roe
         Predicate<Employee> predicate = (e) -> ENGINEER == e.getRole();
         var employees = StreamUtils
-                .filterAndSortFirstThree(employeeList, predicate, Comparator.comparing(Employee::getAge, Comparator.reverseOrder()));
+                .filterAndSortFirstThree(employeeList,
+                        predicate,
+                        Comparator.comparing(Employee::getAge, Comparator.reverseOrder()),
+                        Employee::getName);
         employees.forEach(System.out::println);
 
         //return 30.0

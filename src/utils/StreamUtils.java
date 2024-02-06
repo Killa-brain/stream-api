@@ -49,11 +49,15 @@ public class StreamUtils {
      *  необходимо получить список имен 3 самых старших сотрудников с
      *  должностью «Инженер», в порядке убывания возраста
      */
-    public static <T> List<T> filterAndSortFirstThree(List<T> list, Predicate<T> predicate, Comparator<T> comparator) {
+    public static <T, R> List<R> filterAndSortFirstThree(List<T> list,
+                                                         Predicate<T> predicate,
+                                                         Comparator<T> comparator,
+                                                         Function<T, R> mapper) {
         return list.stream()
                 .filter(predicate)
                 .sorted(comparator)
                 .limit(3)
+                .map(mapper)
                 .collect(Collectors.toList());
     }
 
